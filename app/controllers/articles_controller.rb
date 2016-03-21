@@ -3,6 +3,12 @@ class ArticlesController < ApplicationController
     def new
         @article = Article.new
     end
+                
+    
+    def edit
+        @article = Article.find(params[:id])
+    end
+    
     
     def create
         @article = Article.new(article_params)
@@ -10,15 +16,26 @@ class ArticlesController < ApplicationController
                 flash[:notice] = "Article was created"
             redirect_to article_path(@article)
     else 
-       
-        render 'new'
+            render 'new'
+            end
         end
-        
-        def show
+
+        def update
             @article = Article.find(params[:id])
+            if @article.update(article_params) 
+                flash[:notice] = "your article was updated"
+                redirect_to article_path(@article)
+            else 
+                render 'edit'
+            end
+    
+          
+          def show
+            @article = Article.find(params[:id])
+          end
         end
-        
-    end
+    
+
     
     private
     
@@ -26,4 +43,5 @@ class ArticlesController < ApplicationController
         params.require(:article).permit(:title, :description)
     end
     
-end 
+  end 
+
