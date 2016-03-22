@@ -1,5 +1,9 @@
 class ArticlesController < ApplicationController
    
+   def index 
+       @articles = Article.all
+   end
+   
     def new
         @article = Article.new
     end
@@ -18,9 +22,14 @@ class ArticlesController < ApplicationController
     else 
             render 'new'
             end
-        end
+    end
 
-        def update
+
+        def show
+            @article = Article.find(params[:id])
+          end
+
+    def update
             @article = Article.find(params[:id])
             if @article.update(article_params) 
                 flash[:notice] = "your article was updated"
@@ -30,10 +39,8 @@ class ArticlesController < ApplicationController
             end
     
           
-          def show
-            @article = Article.find(params[:id])
-          end
-        end
+          
+    end
     
 
     
@@ -43,5 +50,5 @@ class ArticlesController < ApplicationController
         params.require(:article).permit(:title, :description)
     end
     
-  end 
+end 
 
