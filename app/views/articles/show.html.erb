@@ -1,12 +1,15 @@
-<h1>Showing the show action</h1>
+<h1>Showing selected article</h1>
 
 <p>
-    title: <%= @article.title %>
+
+    Title: <%= @article.title %>
+
 </p>
 
-<p> 
-    description: <%= @article.description %> 
-</p>
+<p>
 
+    Description: <%= @article.description %>
+
+</p>
 <%= link_to 'Edit this Article', edit_article_path(@article) %> |
 <%= link_to 'Back to Listings', articles_path %>
