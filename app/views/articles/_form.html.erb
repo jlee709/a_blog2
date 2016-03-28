@@ -8,21 +8,44 @@
     </ul>    
 <% end %>
 
+ <div class = 'row'>
+     <div class = 'col-xs-8'> 
+      
+  
+<%= form_for(@article, :html => {class: "form-horizontal", role: "form"}) do |f| %>
 
-<%= form_for @article do |f| %>
-    <p>
-        <%= f.label :title %> <br/>
-        <%= f.text_field :title %>
-    </p>
+    <div class = 'form-group'>
+         <div class = 'control-lable-col-sm-2'>
+            <%= f.label :title %> 
+        </div>
+    <div class ='col-sm-8'>    
+        <%= f.text_field :title, class: "form-control", placeholder:"Name of Title", autofocus: true  %>
+    </div>    
+     
+    </div>
     
-    <p>
-        <%= f.label :description  %> <br/>
-        <%= f.text_area :description %>
-    </p>
+    <div class = 'row'>
+        <div class = 'col-xs-8'> 
+      
+        <%= f.label :description  %> 
+    </div>    
     
-    <p>
-        <%= f.submit %>
-    </p>
-<% end %> 
+        <div class = 'col-xs-10'>
+            <%= f.text_area :description, rows: 10, class: "form-control", placeholder:"Body of Article", autofocus: true  %>
+        </div>
+    </div>
+    
+    <br/>
+    
+    <div class = "form-group">
+        <div class = "col-sm-10 col-sm-offset-0">
+            <%= f.submit class: "btn btn-primary btn-large" %>
+        </div>
+    </div>
+    
+<% end %>
 
-<%= link_to 'Back to Listings', articles_path %>
+<div class = "col-xs-6 col-offset-6">
+[<%= link_to 'Cancel request and back to Article Listings', articles_path %>]
+     </div>
+ </div>
