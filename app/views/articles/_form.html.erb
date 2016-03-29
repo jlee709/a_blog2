@@ -1,18 +1,8 @@
+<%= render 'layouts/shared/errors', obj: @article %>
 
-
-<% if @article.errors.any? %>
-    <h3>The following reasons are why the article could not be created</h3>
-    <ul> <% @article.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>    
-<% end %>
-
- <div class = 'row'>
+<div class = 'row'>
      <div class = 'col-xs-8'> 
-      
-  
-<%= form_for(@article, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+          <%= form_for(@article, :html => {class: "form-horizontal", role: "form"}) do |f| %>
 
     <div class = 'form-group'>
          <div class = 'control-lable-col-sm-2'>
@@ -26,9 +16,8 @@
     
     <div class = 'row'>
         <div class = 'col-xs-8'> 
-      
-        <%= f.label :description  %> 
-    </div>    
+          <%= f.label :description  %> 
+        </div>    
     
         <div class = 'col-xs-10'>
             <%= f.text_area :description, rows: 10, class: "form-control", placeholder:"Body of Article", autofocus: true  %>
@@ -47,5 +36,6 @@
 
 <div class = "col-xs-6 col-offset-6">
 [<%= link_to 'Cancel request and back to Article Listings', articles_path %>]
-     </div>
- </div>
+</div>
+         
+       
