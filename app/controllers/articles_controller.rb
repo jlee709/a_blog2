@@ -1,25 +1,25 @@
 class ArticlesController < ApplicationController
+    before_action :set_article, only: [:edit, :update, :show, :destroy]
+    before_action :require_user, except: [:index, :show]
+    before_action :require_same_user, only: [:edit, :update, :destroy]
+
+
     
-before_action :set_article, only: [:edit,:update,:show,:destroy]
-    
-   
    def index 
-       @articles = Article.all
+       @articles = Article.paginate(page: params[:page], per_page: 5)
    end    
     
-    def new
+   def new
         @article = Article.new
-    end
+   end
    
-    def edit
-        
-    end
+   def edit
+   end
                 
     
-    def create
-   
-        @article = Article.new(article_params)
-        @article.user = User.first
+   def create
+       @article = Article.new(article_params)
+       @article.user = User.first
             if  @article.save 
                 flash[:success] = "Article was successfully created"
                 redirect_to article_path(@article)
@@ -27,7 +27,7 @@ before_action :set_article, only: [:edit,:update,:show,:destroy]
             else
                 render 'new'
             end
-    end
+   end
     
     def update
        
@@ -69,5 +69,10 @@ before_action :set_article, only: [:edit,:update,:show,:destroy]
          params.require(:article).permit(:title, :description)
         end
     
-
+    def recquire_same_user
+        if current_user != @article.user
+            flash[:danger] = "You do not have clearance to make these changes"
+            redirect_to root_path
+        end
+    end
 
