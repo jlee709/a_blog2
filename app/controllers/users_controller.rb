@@ -33,7 +33,6 @@ before_action :require_same_user, only: [:edit, :update]
       render 'edit'
     end
   end 
-
   def show
     @user_articles = User.paginate(page: params[:page], per_page: 5)
   end
@@ -46,8 +45,9 @@ before_action :require_same_user, only: [:edit, :update]
   
   
     def require_same_user
-      if current_user != @user
-        flash[:danger] = "You can only edit yout own account"
+      if !logged_in? && current_user != @user
+        flash[:danger] = "You can only edit your own account"
+        redirect_to root_path
       end 
     end
     

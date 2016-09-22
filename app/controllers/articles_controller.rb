@@ -70,7 +70,7 @@ class ArticlesController < ApplicationController
          params.require(:article).permit(:title, :description)
         end
     
-    def recquire_same_user
+    def require_same_user
         if current_user != @article.user
             flash[:danger] = "You do not have clearance to make these changes"
             redirect_to root_path
